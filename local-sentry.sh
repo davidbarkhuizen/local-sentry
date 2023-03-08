@@ -4,6 +4,7 @@ default_port=9000
 tag="latest"
 image_name="local-sentry"
 container_name="local-sentry"
+user="davidbarkhuizen"
 
 function configure_buildkit {
 
@@ -17,6 +18,11 @@ function build {
 
     echo "building $image_name:$tag"
     docker build -t $image_name:$tag -f local-sentry.Dockerfile .
+}
+
+function publish {
+    docker image tag $image_name:$tag $user/$image_name:$tag
+    docker image push $user/$image_name:$tag
 }
 
 function stop {
@@ -44,13 +50,17 @@ function run {
 }
 
 function usage {
-    echo "./local-sentry.sh build|run|stop"
+    echo "./local-sentry.sh build|run|stop|publish"
 }
 
 case $1 in
 
     "build")
         build
+    ;;
+
+    "publish")
+        publish
     ;;
 
     "run")
