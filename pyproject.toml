@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "local-sentry"
+version = "0.1.0"
+description = "local sentry"
+authors = ["David Barkhuizen <david.barkhuizen@gmail.com>"]
+readme = "README.md"
+packages = [{include = "local_sentry"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.85.0"
+python-multipart = "^0.0.5"
+uvicorn = "^0.18.3"
+requests = "^2.8.21"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
